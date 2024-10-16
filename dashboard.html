@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consent Guardian</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 80px; /* Adjust logo size */
+            height: auto;
+        }
+        .header button {
+            background-color: #ff6b4a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .welcome {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .status {
+            margin-bottom: 20px;
+        }
+        .status .status-box {
+            background-color: #ffe6e6;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .status .status-box p {
+            margin: 5px 0;
+            font-size: 20px; /* Increased size for visibility */
+            font-weight: bold; /* Make it stand out */
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .buttons button {
+            background-color: #ff6b4a;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+            cursor: pointer;
+            flex: 1;
+            margin: 0 5px;
+        }
+        .notifications {
+            margin-bottom: 20px;
+        }
+        .notifications p {
+            margin: 5px 0;
+        }
+        .support {
+            text-align: center;
+        }
+        .support button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        /* Popup styles */
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+        .popup-content button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="images/logo.png" alt="Consent Guardian Logo"/>
+            <span>Consent Guardian</span>
+            <button onclick="showLogoutPopup()">Logout</button>
+        </div>
+        <div class="welcome">
+            Welcome, Juan Paolo Dente!
+        </div>
+        <div class="status">
+            <div class="status-box">
+                <p>Total Consents Given: 5</p>
+                <p>Total Consents Revoked: 2</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <button onclick="window.location.href='manage.html'">Manage Consent</button>
+            <button>View Consent History</button>
+            <button>Consent Preferences</button>
+        </div>
+        <div class="notifications">
+            <p>New consent policy update available.</p>
+            <p>Your consent for 'App X' expires soon.</p>
+            <p>Consent revoked for 'Service Y'.</p>
+        </div>
+        <div class="support">
+            <button>Help & Support</button>
+        </div>
+        
+        <!-- Logout popup -->
+        <div class="popup" id="logout-popup">
+            <div class="popup-content">
+                <h2>Confirm Logout</h2>
+                <p>Are you sure you want to logout?</p>
+                <button onclick="logout()">Yes, Logout</button>
+                <button onclick="hideLogoutPopup()">Cancel</button>
+            </div>
+        </div>
+        
+        <script>
+            function showLogoutPopup() {
+                document.getElementById("logout-popup").style.display = "flex";
+            }
+            function hideLogoutPopup() {
+                document.getElementById("logout-popup").style.display = "none";
+            }
+            function logout() {
+                // Redirect to index.html upon logout
+                window.location.href = "index.html";
+            }
+        </script>
+    </div>
+</body>
+</html>
