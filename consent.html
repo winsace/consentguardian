@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consent Preferences - Consent Guardian</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            width: 450px; /* Keep width consistent */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 40px; /* Increased padding for consistency */
+            box-sizing: border-box;
+            max-height: 90vh; /* Limit the height to avoid excessive scrolling */
+            overflow-y: auto; /* Allow vertical scrolling if necessary */
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px; /* Adjusted margin */
+        }
+        .header img {
+            width: 80px; /* Adjust logo size */
+            height: auto;
+        }
+        .header button {
+            background-color: #ff6b4a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px; /* Reduced button padding */
+            cursor: pointer;
+            margin-left: 5px;
+            font-size: 14px; /* Consistent font size for buttons */
+        }
+        .title-container {
+            flex: 1;
+            text-align: center;
+        }
+        .title {
+            font-size: 18px; /* Match title size with other pages */
+            font-weight: bold;
+            margin: 0;
+        }
+        .consent-option {
+            text-align: left;
+            margin: 15px 0; /* Adjusted margin */
+        }
+        .full-consent {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 10px 0; /* Adjusted margin */
+        }
+        .full-consent-item {
+            margin: 5px 10px;
+            padding: 5px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            font-size: 12px; /* Smaller font size for items */
+        }
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .checkbox-group label {
+            margin: 5px; /* Reduced margin for checkbox labels */
+            font-size: 12px; /* Smaller font size for checkboxes */
+        }
+        .footer {
+            font-size: 12px; /* Consistent footer size */
+            margin-top: 10px; /* Adjusted margin */
+            text-align: center;
+        }
+        .confirmation {
+            margin-top: 5px; /* Adjusted margin for confirmation message */
+            color: green;
+            font-weight: bold;
+            display: none; /* Initially hidden */
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+        .popup-content button {
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        let confirmationMessage = '';
+
+        function savePreferences() {
+            confirmationMessage = "Your preferences have been updated.";
+            document.getElementById('confirmation').innerText = confirmationMessage;
+            document.getElementById('confirmation').style.display = 'block'; // Show confirmation message
+            setTimeout(() => {
+                document.getElementById('confirmation').style.display = 'none'; // Hide after 3 seconds
+            }, 3000);
+        }
+        
+        function resetPreferences() {
+            // Reset checkboxes to unchecked
+            const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            confirmationMessage = "Preferences reset to default.";
+            document.getElementById('confirmation').innerText = confirmationMessage;
+            document.getElementById('confirmation').style.display = 'block'; // Show confirmation message
+            setTimeout(() => {
+                document.getElementById('confirmation').style.display = 'none'; // Hide after 3 seconds
+            }, 3000);
+        }
+        
+        function showLogoutPopup() {
+            document.getElementById("logout-popup").style.display = "flex";
+        }
+        function hideLogoutPopup() {
+            document.getElementById("logout-popup").style.display = "none";
+        }
+        function logout() {
+            // Redirect to index.html upon logout
+            window.location.href = "index.html";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img alt="Consent Guardian Logo" src="images/logo.png" />
+            <div class="title-container">
+                <span class="title">PREFERENCES</span>
+            </div>
+            <button onclick="window.location.href='dashboard.html'"><i class="fas fa-home"></i></button>
+            <button onclick="showLogoutPopup()">Logout</button>
+        </div>
+        
+        <div class="consent-option">
+            <label>
+                <span style="font-weight: bold; font-size: 16px;">FULL CONSENT</span> 
+                <div class="full-consent">
+                    <div class="full-consent-item">Name</div>
+                    <div class="full-consent-item">Age</div>
+                    <div class="full-consent-item">Email</div>
+                    <div class="full-consent-item">Gender</div>
+                    <div class="full-consent-item">Location</div>
+                    <div class="full-consent-item">Behavioral Data</div>
+                    <div class="full-consent-item">Interests</div>
+                    <div class="full-consent-item">Purchase History</div>
+                    <div class="full-consent-item">Marketing Emails</div>
+                </div>
+            </label>
+        </div>
+        
+        <div class="consent-option">
+            <label>
+                <span style="font-weight: bold; font-size: 16px;">PARTIAL CONSENT</span>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="name" /> Name</label>
+                    <label><input type="checkbox" id="age" /> Age</label>
+                    <label><input type="checkbox" id="email" /> Email</label>
+                    <label><input type="checkbox" id="gender" /> Gender</label>
+                    <label><input type="checkbox" id="location" /> Location</label>
+                    <label><input type="checkbox" id="behavioralData" /> Behavioral Data</label>
+                    <label><input type="checkbox" id="interests" /> Interests</label>
+                    <label><input type="checkbox" id="purchaseHistory" /> Purchase History</label>
+                    <label><input type="checkbox" id="marketingEmails" /> Marketing Emails</label>
+                </div>
+            </label>
+        </div>
+        
+        <div class="consent-option">
+            <label>
+                <span style="font-weight: bold; font-size: 16px;">NOTIFICATION PREFERENCES</span>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="smsNotifications" /> SMS Notifications</label>
+                    <label><input type="checkbox" id="emailNotifications" /> Email Notifications</label>
+                    <label><input type="checkbox" id="inAppNotifications" /> In-App Notifications</label>
+                </div>
+            </label>
+        </div>
+        
+        <div class="footer">
+            <button onclick="savePreferences()">Save Preferences</button>
+            <button onclick="resetPreferences()">Reset to Default</button>
+            <p id="confirmation" class="confirmation"></p> <!-- Confirmation message section -->
+        </div>
+        
+        <!-- Logout popup -->
+        <div class="popup" id="logout-popup">
+            <div class="popup-content">
+                <h2>Confirm Logout</h2>
+                <p>Are you sure you want to logout?</p>
+                <button onclick="logout()">Yes, Logout</button>
+                <button onclick="hideLogoutPopup()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
